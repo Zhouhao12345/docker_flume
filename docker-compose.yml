@@ -1,22 +1,11 @@
-version: '3'
-
-services:
-
-  source:
-    image: flume:latest
+flume:
+    image: probablyfine/flume 
     ports:
      - "44444:44444"
     volumes:
      - ./fixtures/source.conf:/opt/flume-config/flume.conf
+     - /mnt/hgfs/centosData/erp/storage/logs/laravel.log:/var/log/laravel.log
     environment:
-    - FLUME_AGENT_NAME=docker
-    links:
-      - "sink:sink"
-
-  sink:
-    image: flume:latest
-    volumes:
-     - ./fixtures/sink.conf:/opt/flume-config/flume.conf
-     - ./output:/var/tmp/output
-    environment:
-     - FLUME_AGENT_NAME=docker
+      FLUME_AGENT_NAME: a1
+    external_links:
+      - kafkadocker_kafka_1:kafka   
