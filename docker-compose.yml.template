@@ -4,7 +4,7 @@ flume:
      - "44444:44444"
     volumes:
      - ./fixtures/source.conf:/opt/flume-config/flume.conf
-     - /mnt/hgfs/centosData/erp/storage/logs/laravel.log:/var/log/laravel.log
+     - host_log:/var/log/client.log
     environment:
       FLUME_AGENT_NAME: a1
     external_links:
